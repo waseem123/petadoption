@@ -1,13 +1,13 @@
 package com.infostack.petadoption.controllers;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +28,8 @@ import com.infostack.petadoption.services.OwnerService;
 import com.infostack.petadoption.services.PetAdopterService;
 import com.infostack.petadoption.services.PetService;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping(path="/petanimal")
 public class PetController {
 	@Autowired
@@ -93,6 +94,12 @@ public class PetController {
 		return pet;
 	}
 	
+	@RequestMapping("/add-new")
+	public String addNewPet(ModelMap modelMap) {
+		String[] pet_category = {"Cat","Dog"};
+		modelMap.addAttribute("pet_category",pet_category);
+		return "add-pet";
+	}
 	@PostMapping("/add")
 	public PetAnimal addNew(
 			@RequestParam("pet_name") String petName,
