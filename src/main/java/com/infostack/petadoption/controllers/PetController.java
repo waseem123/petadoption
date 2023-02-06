@@ -8,14 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.infostack.petadoption.Models.Application;
 import com.infostack.petadoption.Models.PetAdopter;
@@ -112,9 +105,18 @@ public class PetController {
 		petAnimal.setPetOwner(petOwner);
 		return petService.addNew(petAnimal);
 	}
+
+	@RequestMapping("/pet-edit/{pet_id}")
+	public String edit(ModelMap modelMap,@PathVariable int pet_id) {
+		String[] pet_category = {"Cat","Dog"};
+		modelMap.addAttribute("pet_category",pet_category);
+		PetAnimal petAnimal = petService.getAnimalById(pet_id);
+		modelMap.addAttribute("pet",petAnimal);
+		return "edit-pet";
+	}
 	
-	@PutMapping("/edit")
-	public PetAnimal edit(
+	@RequestMapping(value = "/edit",method = RequestMethod.POST)
+	public String edit(
 			@RequestParam("pet_id") int petId,
 			@RequestParam("pet_name") String petName,
 			@RequestParam("pet_category") String petCategory, 
@@ -122,7 +124,8 @@ public class PetController {
 			@RequestParam("pet_gender") String petGender, 
 			@RequestParam("pet_breed") String petBreed) {
 		PetAnimal petAnimal = new PetAnimal(petId,petName,petCategory,petAge,petGender,petBreed,false);
-		return petService.addNew(petAnimal);
+		petService.addNew(petAnimal);
+		return "redirect:/petanimal/add-new";
 	}
 	
 	@DeleteMapping("/delete/{pet_id}")

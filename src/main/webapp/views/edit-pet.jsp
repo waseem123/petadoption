@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Add Pets</title>
+	<title>Edit Pet :: ${pet.petName}</title>
 	<style type="text/css">
         td{
             border: 1px solid black;
@@ -24,6 +24,7 @@
 		}
 
 		.input{
+			height: 20px;
 			width: 300px;
 			padding: 8px;
 		}
@@ -36,11 +37,11 @@
         ${message}
     </c:if>
 	<div class="formdiv">
-		<form action="add" method="POST">
+		<form action="/petanimal/edit" method="POST">
 			<table>
 				<thead>
 					<tr>
-						<th colspan="2"><h3>Add a New Pet</h3></th>
+						<th colspan="2"><h3>Edit Pet</h3></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,50 +50,53 @@
                             <label for="pet_name">Pet Name</label>
                         </td>
                         <td>
-                            <input type="text" name="pet_name" id="pet_name" class="input">
+                            <input type="text" value="${pet.petId}" name = "pet_id">
+                            <input type="text" value="${pet.petName}" name = "pet_name" class="input">
                         </td>
                     </tr>
+
                     <tr>
 						<td>
-							<label for="pet_category">Paid Category</label>
+							<label for="pet_category">Pet Category</label>
 						</td>
 						<td>
-							 <select id="pet_category" name="pet_category" class="input" style="padding:0px">
+							<select id="pet_category" name="pet_category" class="input" style="padding:0px">
                                 <c:forEach items="${pet_category}" var="pet_category">
-                                    <option value="${pet_category}">
+                                    <option value="${pet_category}" <c:if test="${pet_category == pet.petCategory}">selected</c:if>>
                                         ${pet_category}
                                     </option>
                                 </c:forEach>
                             </select>
 						</td>
 					</tr>
+
 					<tr>
                         <td>
                             <label for="pet_age">Pet Age</label>
                         </td>
                         <td>
-                            <input type="number" name="pet_age" id="pet_age" class="input">
+                            <input type="number" id="pet_age" class="input" name="pet_age" value="${pet.petAge}">
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td>
-                            <label for="pet_gender">Pet Gender</label>
+                            <label for="pet_gender">Pet Breed</label>
                         </td>
                         <td>
-                        	<label for="pet_gender_male">Male</label>
-                            <input type="radio" name="pet_gender" id="pet_gender_male" value="male">
-                        	<label for="pet_gender_female">Female</label>
-                            <input type="radio" name="pet_gender" id="pet_gender_female" value="female">
+                            <label for="pet_gender_male">Male</label>
+                            <input type="radio" id="pet_gender_male" name="pet_gender" value="Male" ${pet.petGender=="Male"?"checked":""}>
+                            <label for="pet_gender_male">Female</label>
+                            <input type="radio" id="pet_gender_female" name="pet_gender" value="Female" ${pet.petGender=="Female"?"checked":""}>
                         </td>
                     </tr>
-                    
+
 					<tr>
                         <td>
                             <label for="pet_breed">Pet Breed</label>
                         </td>
                         <td>
-                            <input type="text" name="pet_breed" id="pet_breed" class="input">
+                           <input type="text" id="pet_breed" class="input" name="pet_breed" value="${pet.petBreed}">
                         </td>
                     </tr>
 					<tr>
