@@ -38,10 +38,12 @@ public class PetController {
 	private ApplicationService applicationService;
 	
 	@RequestMapping("/")
-	public List<PetAnimal> getAnimals() {
+	public String getAnimals(ModelMap modelMap) {
 		List<PetAnimal> petAnimalList=new ArrayList<>();
 		petAnimalList = petService.getAllAnimals();
-		return petAnimalList;
+		 modelMap.addAttribute("pets",petAnimalList);
+		 modelMap.addAttribute("message","Total "+petAnimalList.size()+" records found.");
+		return "pet-list";
 	}
 	
 	@RequestMapping("/{pet_id}")
@@ -106,7 +108,7 @@ public class PetController {
 		return petService.addNew(petAnimal);
 	}
 
-	@RequestMapping("/pet-edit/{pet_id}")
+	@RequestMapping("/edit-pet/{pet_id}")
 	public String edit(ModelMap modelMap,@PathVariable int pet_id) {
 		String[] pet_category = {"Cat","Dog"};
 		modelMap.addAttribute("pet_category",pet_category);
