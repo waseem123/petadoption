@@ -23,7 +23,7 @@ import com.infostack.petadoption.services.PetService;
 
 //@RestController
 @Controller
-@RequestMapping(path="/petanimal")
+@RequestMapping(path="/pets")
 public class PetController {
 	@Autowired
 	PetService petService;
@@ -89,57 +89,7 @@ public class PetController {
 		return pet;
 	}
 	
-	@RequestMapping("/add-new")
-	public String addNewPet(ModelMap modelMap) {
-		String[] pet_category = {"Cat","Dog"};
-		modelMap.addAttribute("pet_category",pet_category);
-		return "add-pet";
-	}
-	@PostMapping("/add")
-	public PetAnimal addNew(
-			@RequestParam("pet_name") String petName,
-			@RequestParam("pet_category") String petCategory, 
-			@RequestParam("pet_age") int petAge, 
-			@RequestParam("pet_gender") String petGender, 
-			@RequestParam("pet_breed") String petBreed) {
-		PetAnimal petAnimal = new PetAnimal(petName,petCategory,petAge,petGender,petBreed,false);
-		PetOwner petOwner = ownerService.getOwnerById(1);
-		petAnimal.setPetOwner(petOwner);
-		return petService.addNew(petAnimal);
-	}
-
-	@RequestMapping("/edit-pet/{pet_id}")
-	public String edit(ModelMap modelMap,@PathVariable int pet_id) {
-		String[] pet_category = {"Cat","Dog"};
-		modelMap.addAttribute("pet_category",pet_category);
-		PetAnimal petAnimal = petService.getAnimalById(pet_id);
-		modelMap.addAttribute("pet",petAnimal);
-		return "edit-pet";
-	}
 	
-	@RequestMapping(value = "/edit",method = RequestMethod.POST)
-	public String edit(
-			@RequestParam("pet_id") int petId,
-			@RequestParam("pet_name") String petName,
-			@RequestParam("pet_category") String petCategory, 
-			@RequestParam("pet_age") int petAge, 
-			@RequestParam("pet_gender") String petGender, 
-			@RequestParam("pet_breed") String petBreed) {
-		PetAnimal petAnimal = new PetAnimal(petId,petName,petCategory,petAge,petGender,petBreed,false);
-		petService.addNew(petAnimal);
-		return "redirect:/petanimal/add-new";
-	}
-	
-	@DeleteMapping("/delete/{pet_id}")
-	public String deletePet(@PathVariable("pet_id") int petId) {
-		PetAnimal pet = petService.getAnimalById(petId);
-		if(pet.isPetStatus()) {
-			petService.deletePetAnimal(petId);
-			return "DELETED SUCCESFULLY";
-		}
-		return "CANNOT DELETE";
-		
-	}
 	
 	@RequestMapping("/application/{pet_id}")
 	public Application apply(@PathVariable("pet_id") int petId) throws ParseException {

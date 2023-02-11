@@ -24,4 +24,8 @@ public interface PetRepository extends CrudRepository<PetAnimal,Integer> {
 	
 	@Query("SELECT new com.infostack.petadoption.dto.PetData(p.petId,p.petName,p.petAge) from PetAnimal p WHERE p.petCategory=?1 AND p.petGender=?2")
 	public List<PetData> getAnimalsData(String petCategory,String petGender);
+
+	@Query("select p from PetAnimal p where p.petOwner.ownerId = ?1")
+	List<PetAnimal> getAnimalsByOwner(int ownerId);
+
 }

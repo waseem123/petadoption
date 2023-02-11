@@ -37,7 +37,7 @@
         ${message}
     </c:if>
 	<div class="formdiv">
-		<form action="/petanimal/edit" method="POST">
+		<form action="/owner/pets/edit" method="POST">
 			<table>
 				<thead>
 					<tr>
@@ -50,7 +50,7 @@
                             <label for="pet_name">Pet Name</label>
                         </td>
                         <td>
-                            <input type="text" value="${pet.petId}" name = "pet_id">
+                            <input type="hidden" value="${pet.petId}" name = "pet_id">
                             <input type="text" value="${pet.petName}" name = "pet_name" class="input">
                         </td>
                     </tr>

@@ -25,15 +25,16 @@
         <table>
             <thead>
                 <tr>
-                    <td colspan="7"><a href="/pets/add-new" style="float:right"><button>Add New Pet</button></a></td>
+                    <td colspan="8"><a href="/owner/pets/add-new" style="float:right"><button>Add New Pet</button></a></td>
                 </tr>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Age</th>
+                    <th>Age (Months)</th>
                     <th>Gender</th>
-                    <th>Experience (Years)</th>
-                    <th>Address</th>
+                    <th>Category</th>
+                    <th>Breed</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -44,19 +45,20 @@
                     <td>${pet.petName}</td>
                     <td>${pet.petAge}</td>
                     <td>${pet.petGender}</td>
+                    <td>${pet.petCategory}</td>
                     <td>${pet.petBreed}</td>
-                    <td>${pet.petStatus}</td>
+                    <td>${pet.petStatus==true?"AVAILABLE":"ADOPTED"}</td>
                     <td>
-                        <a href="/pets/${pet.petId}"><button>View</button></a>
-                        <a href="/pets/edit-pet/${pet.petId}"><button>Edit</button></a>
-                        <a href="/pets/delete/${pet.petId}"><button>Delete</button></a>
+                        <a href="/owner/pets/${pet.petId}"><button>View</button></a>
+                        <a href="/owner/pets/edit-pet/${pet.petId}"><button>Edit</button></a>
+                        <a href="/owner/pets/delete/${pet.petId}"><button>Delete</button></a>
                     </td>
                 </tr>
                 </c:forEach>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">${message}</td>
+                    <td colspan="8">${message}</td>
                 </tr>
             </tfoot>
         </table>
