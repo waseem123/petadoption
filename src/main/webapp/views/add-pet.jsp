@@ -81,9 +81,9 @@
                         </td>
                         <td>
                         	<label for="pet_gender_male">Male</label>
-                            <input type="radio" name="pet_gender" id="pet_gender_male" value="male">
+                            <input type="radio" name="pet_gender" id="pet_gender_male" value="Male">
                         	<label for="pet_gender_female">Female</label>
-                            <input type="radio" name="pet_gender" id="pet_gender_female" value="female">
+                            <input type="radio" name="pet_gender" id="pet_gender_female" value="Female">
                         </td>
                     </tr>
 

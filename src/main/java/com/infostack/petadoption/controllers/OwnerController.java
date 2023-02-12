@@ -64,7 +64,6 @@ public class OwnerController {
         session.setAttribute("ownerId", owner.getOwnerId());
         session.setAttribute("userName", owner.getOwnerName());
         session.setAttribute("user", "owner");
-
         return "redirect:/owner/pets";
     }
 
@@ -114,10 +113,10 @@ public class OwnerController {
 
         int ownerId = (int) session.getAttribute("ownerId");
         PetOwner petOwner = ownerService.getOwnerById(ownerId);
-        PetAnimal petAnimal = new PetAnimal(petName, petCategory, petAge, petGender, petBreed, false);
+        PetAnimal petAnimal = new PetAnimal(petName, petCategory, petAge, petGender, petBreed, true);
         petAnimal.setPetOwner(petOwner);
         petService.addNew(petAnimal);
-        return "redirect:/pets/";
+        return "redirect:/owner/pets/";
     }
 
     @RequestMapping("/pets/edit-pet/{pet_id}")
@@ -140,13 +139,14 @@ public class OwnerController {
                        @RequestParam("pet_category") String petCategory,
                        @RequestParam("pet_age") int petAge,
                        @RequestParam("pet_gender") String petGender,
+                       @RequestParam("pet_status") boolean petStatus,
                        @RequestParam("pet_breed") String petBreed) {
         HttpSession session = request.getSession();
         if (session.getAttribute("ownerId") == null) {
             return "redirect:/owner/";
         }
         int ownerId = (int) session.getAttribute("ownerId");
-        PetAnimal petAnimal = new PetAnimal(petId, petName, petCategory, petAge, petGender, petBreed, false);
+        PetAnimal petAnimal = new PetAnimal(petId, petName, petCategory, petAge, petGender, petBreed, petStatus);
         PetOwner petOwner = ownerService.getOwnerById(ownerId);
         petAnimal.setPetOwner(petOwner);
         petService.addNew(petAnimal);
@@ -169,9 +169,7 @@ public class OwnerController {
         }
         modelMap.addAttribute("error", true);
         modelMap.addAttribute("message", "ADOPTED PET CAN NOT BE DELETED.");
-
         return "pet-list";
-
     }
 
     @RequestMapping("/application/")

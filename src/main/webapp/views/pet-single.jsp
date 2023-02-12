@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false" %>
 <html>
     <head>
-        <title>Subscription Plan :: ${plan.planTitle}</title>
+        <title>Pet :: ${pet.petName}</title>
         <style type="text/css">
         		table,th,td{
         			border: 1px solid black;
@@ -18,28 +18,40 @@
 
     <body>
         <jsp:include page="header.jsp" ></jsp:include>
-        <h2>Subscription Plan Information</h2>
+        <h2>Pet Information</h2>
         <c:if test="${error} eq true">
             <h3>${error}</h3>
         </c:if>
         <table>
     		<thead>
     			<tr>
-    				<th colspan="2"><h2>${plan.planTitle}</h2></th>
+    				<th colspan="2"><h2>${pet.petName}</h2></th>
     			</tr>
     		</thead>
     		<tbody>
     			<tr>
-    				<td>ID</td>
-    				<td>${plan.planId}</td>
+    				<th>ID</td>
+    				<td>${pet.petId}</td>
                 </tr>
                 <tr>
-                    <td>Duration(Months)</td>
-                    <td>${plan.planDuration}</td>
+                    <th>Age</td>
+                    <td>${pet.petAge} Months</td>
                 </tr>
                 <tr>
-                    <td>Fees</td>
-                    <td>INR. ${plan.planFees}</td>
+                    <th>Gender</td>
+                    <td>${pet.petGender}</td>
+                </tr>
+                <tr>
+                    <th>Category</td>
+                    <td>${pet.petCategory}</td>
+                </tr>
+                <tr>
+                    <th>Breed</td>
+                    <td>${pet.petBreed}</td>
+                </tr>
+                <tr>
+                    <th>Status</td>
+                    <td>${pet.petStatus==true?"AVAILABLE":"ADOPTED"}</td>
                 </tr>
     		</tbody>
     	</table>

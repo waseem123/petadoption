@@ -25,15 +25,14 @@
         <table>
             <thead>
                 <tr>
-                    <td colspan="7"><a href="/pets/add-new" style="float:right"><button>Add New Pet</button></a></td>
-                </tr>
-                <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Age</th>
+                    <th>Age (Months)</th>
                     <th>Gender</th>
-                    <th>Experience (Years)</th>
-                    <th>Address</th>
+                    <th>Category</th>
+                    <th>Breed</th>
+                    <th>Owner</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -44,12 +43,13 @@
                     <td>${pet.petName}</td>
                     <td>${pet.petAge}</td>
                     <td>${pet.petGender}</td>
+                    <td>${pet.petCategory}</td>
                     <td>${pet.petBreed}</td>
-                    <td>${pet.petStatus}</td>
+                    <td>${pet.petOwner.ownerName}</td>
+                    <td>${pet.petStatus==true?"AVAILABLE":"ADOPTED"}</td>
                     <td>
                         <a href="/pets/${pet.petId}"><button>View</button></a>
-                        <a href="/pets/edit-pet/${pet.petId}"><button>Edit</button></a>
-                        <a href="/pets/delete/${pet.petId}"><button>Delete</button></a>
+                        <a href="/pets/application/${pet.petId}"><button ${pet.petStatus==false?"disabled":""}>Apply to Adopt</button></a>
                     </td>
                 </tr>
                 </c:forEach>

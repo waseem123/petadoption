@@ -81,12 +81,12 @@
 
                     <tr>
                         <td>
-                            <label for="pet_gender">Pet Breed</label>
+                            <label for="pet_gender">Pet Gender</label>
                         </td>
                         <td>
                             <label for="pet_gender_male">Male</label>
                             <input type="radio" id="pet_gender_male" name="pet_gender" value="Male" ${pet.petGender=="Male"?"checked":""}>
-                            <label for="pet_gender_male">Female</label>
+                            <label for="pet_gender_female">Female</label>
                             <input type="radio" id="pet_gender_female" name="pet_gender" value="Female" ${pet.petGender=="Female"?"checked":""}>
                         </td>
                     </tr>
@@ -99,6 +99,19 @@
                            <input type="text" id="pet_breed" class="input" name="pet_breed" value="${pet.petBreed}">
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                            <label for="pet_status">Pet Status</label>
+                        </td>
+                        <td>
+                            <label for="pet_status_available">AVAILABLE</label>
+                            <input type="radio" id="pet_status_available" name="pet_status" value="true" ${pet.petStatus=="true"?"checked":""}>
+                            <label for="pet_status_adopted">ADOPTED</label>
+                            <input type="radio" id="pet_status_adopted" name="pet_status" value="false" ${pet.petStatus=="false"?"checked":""}>
+                        </td>
+                    </tr>
+
 					<tr>
 						<td colspan="2"><button type="submit">Submit</button></td>
 					</tr>

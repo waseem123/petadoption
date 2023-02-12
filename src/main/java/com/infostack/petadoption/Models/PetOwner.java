@@ -2,21 +2,23 @@ package com.infostack.petadoption.Models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "tbl_petowner")
 public class PetOwner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "owner_id")
     private int ownerId;
+    @Column(name = "owner_name")
     private String ownerName;
+    @Column(name = "owner_address")
     private String ownerAddress;
+    @Column(name = "owner_email")
     private String ownerEmail;
+    @Column(name = "owner_password")
     private String ownerPassword;
     @OneToMany
     private List<PetAnimal> petAnimals;
