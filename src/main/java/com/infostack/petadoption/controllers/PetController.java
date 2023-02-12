@@ -1,7 +1,10 @@
 package com.infostack.petadoption.controllers;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +24,12 @@ import com.infostack.petadoption.services.OwnerService;
 import com.infostack.petadoption.services.PetAdopterService;
 import com.infostack.petadoption.services.PetService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 //@RestController
 @Controller
-@RequestMapping(path = "/pets")
+@RequestMapping(path = "/adopter")
 public class PetController {
     @Autowired
     PetService petService;
@@ -38,15 +44,47 @@ public class PetController {
     private ApplicationService applicationService;
 
     @RequestMapping("/")
+    private String home(ModelMap modelMap) {
+        modelMap.addAttribute("pagetitle", "Login");
+        modelMap.addAttribute("user", "Adopter");
+        return "login";
+    }
+
+    @RequestMapping("/login")
+    private String login(ModelMap modelMap,
+                         HttpServletRequest request,
+                         @RequestParam(value = "user_email", required = true) String user_email,
+                         @RequestParam(value = "user_password", required = true) String user_password) {
+        modelMap.addAttribute("pagetitle", "Login");
+        PetAdopter adopter = petAdopterService.login(user_email, user_password);
+        if (adopter == null) {
+            modelMap.addAttribute("error", true);
+            modelMap.addAttribute("message", "Invalid Credentials! Please try again.");
+            return "login";
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("adopterId", adopter.getAdopterId());
+        session.setAttribute("userName", adopter.getAdopterName());
+        session.setAttribute("user", "adopter");
+        modelMap.addAttribute("user", "adopter");
+        return "redirect:/adopter/pets";
+    }
+
+    @RequestMapping("/pets")
     public String getAnimals(ModelMap modelMap) {
+        String[] pet_category = {"Cat", "Dog"};
+        String[] pet_gender = {"Male", "Female"};
         List<PetAnimal> petAnimalList = new ArrayList<>();
         petAnimalList = petService.getAllAnimals();
+
+        modelMap.addAttribute("pet_category", pet_category);
+        modelMap.addAttribute("pet_gender", pet_gender);
         modelMap.addAttribute("pets", petAnimalList);
         modelMap.addAttribute("message", "Total " + petAnimalList.size() + " records found.");
         return "pet-list";
     }
 
-    @RequestMapping("/{pet_id}")
+    @RequestMapping("/pets/{pet_id}")
     public String getAnimalById(ModelMap modelMap, @PathVariable int pet_id) {
         PetAnimal pet = null;
         try {
@@ -55,57 +93,48 @@ public class PetController {
             pet = new PetAnimal();
         }
         modelMap.addAttribute("pet", pet);
-        return "pet_single-owner";
+        return "pet-single-owner";
     }
 
-    @GetMapping("/search")
-    public PetAnimal getAnimalByName(@RequestParam("pet_name") String petName) {
-        PetAnimal pet = null;
-        try {
-            pet = petService.getAnimalByName(petName);
-        } catch (Exception ex) {
-            pet = new PetAnimal();
-        }
-        return pet;
+    @RequestMapping("/pets/search")
+    public String getAnimalsByCategoryAndGender(ModelMap modelMap, @RequestParam("pet_category") String petCategory, @RequestParam("pet_breed") String petBreed, @RequestParam("pet_gender") String petGender) {
+        String[] pet_category = {"Cat", "Dog"};
+        String[] pet_gender = {"Male", "Female"};
+        List<PetAnimal> pets = null;
+        pets = petService.getAnimalsByCategoryAndGender(petCategory, petGender, petBreed);
+        modelMap.addAttribute("pet_category", pet_category);
+        modelMap.addAttribute("pet_gender", pet_gender);
+        modelMap.addAttribute("pets", pets);
+        modelMap.addAttribute("message", "Total " + pets.size() + " records found.");
+        return "pet-list";
     }
 
-    @GetMapping("/searchall")
-    public List<PetAnimal> getAnimalsByName(@RequestParam("pet_name") String petName) {
-        List<PetAnimal> pet = null;
-        pet = petService.getAnimalsByName(petName);
-        return pet;
-    }
-
-    @GetMapping("/searchbycategory")
-    public List<PetAnimal> getAnimalsByCategoryAndGender(@RequestParam("pet_category") String petCategory, @RequestParam("pet_gender") String petGender) {
-        List<PetAnimal> pet = null;
-        pet = petService.getAnimalsByCategoryAndGender(petCategory, petGender);
-        return pet;
-    }
-
-    @GetMapping("/searchbycategoryandgender")
-    public List<PetData> getAnimalsData(@RequestParam("pet_category") String petCategory, @RequestParam("pet_gender") String petGender) {
-        List<PetData> pet = null;
-        pet = petService.getAnimalsData(petCategory, petGender);
-        return pet;
-    }
-
-
-    @RequestMapping("/application/{pet_id}")
-    public Application apply(@PathVariable("pet_id") int petId) throws ParseException {
-        PetAnimal petAnimal = petService.getAnimalById(petId);
+    @RequestMapping("/pets/apply")
+    public String apply(@RequestParam("pet_id") int pet_id) throws ParseException {
+        PetAnimal petAnimal = petService.getAnimalById(pet_id);
         PetAdopter petAdopter = petAdopterService.getAdopterById(1);
 
         Application application = new Application();
         application.setPetAnimal(petAnimal);
         application.setPetAdopter(petAdopter);
-        application.setApplicationDate(new SimpleDateFormat("yyyy-MM-dd").parse("2023-01-30"));
-        return applicationService.saveApplication(application);
+        application.setApplicationDate(Date.from(Instant.now()));
+        applicationService.saveApplication(application);
+        return "redirect:/adopter/pets/";
     }
 
-    @RequestMapping("/application/")
-    public List<ApplicationDTO> getApplicationData() {
+    @RequestMapping("/application")
+    public String getApplicationData(ModelMap modelMap) {
+        List<Application> applications = new ArrayList<>();
+        applications = applicationService.getApplicationByAdopter(1);
+        modelMap.addAttribute("applications", applications);
+        modelMap.addAttribute("message", "Total " + applications.size() + " records found.");
+        return "applications";
+    }
 
-        return applicationService.getApplication();
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap modelMap, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";
     }
 }

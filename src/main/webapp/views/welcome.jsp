@@ -41,7 +41,7 @@
 				<tbody>
 					<tr>
 						<td>
-						    <b><a href="/pets/">ADOPT A PET</a></b>
+						    <b><a href="/adopter/">ADOPT A PET</a></b>
 						</td>
 						<td>
 							<b><a href="/owner/">MANAGE PETs</a></b>

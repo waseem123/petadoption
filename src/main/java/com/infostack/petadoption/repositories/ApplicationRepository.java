@@ -13,7 +13,9 @@ public interface ApplicationRepository extends CrudRepository<Application,Intege
 	
 	@Query("SELECT new com.infostack.petadoption.dto.ApplicationDTO(ap.applicationId,ad.adopterName,pet.petName,ap.applicationDate) FROM Application ap INNER JOIN ap.petAdopter ad INNER JOIN ap.petAnimal pet ")
 	public List<ApplicationDTO> getAppData();
+
+	@Query("select a from Application a where a.petAdopter.adopterId = ?1")
+	List<Application> findByPetAdopter_AdopterId(int adopterId);
 	
-	@Query("SELECT new com.infostack.petadoption.dto.ApplicationDTO(ap.applicationId,ad.adopterName,pet.petName,o.ownerName,ap.applicationDate) FROM Application ap INNER JOIN ap.petAdopter ad INNER JOIN ap.petAnimal pet INNER JOIN pet.petOwner o")
-	public List<ApplicationDTO> getAppDataWithOwner();
+
 }

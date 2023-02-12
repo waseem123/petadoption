@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
         <tbody>
             <tr>
                 <th><a href="/${user}/pets">Pets</a></th>
-                <th><a href="/${user}/applications">Applications</a></th>
+                <th><a href="/${user}/application">Applications</a></th>
                 <th><a href="/${user}/logout">Log Out</a></th>
                 <th colspan="5"><u style="text-align:right">Welcome, ${userName}</u></th>
             </tr>

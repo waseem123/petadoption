@@ -13,4 +13,7 @@ public class PetAdopterService {
 		return adopterRepository.findById(adopter_id).get();
 	}
 
+    public PetAdopter login(String user_email, String user_password) {
+		return adopterRepository.login(user_email,user_password);
+    }
 }

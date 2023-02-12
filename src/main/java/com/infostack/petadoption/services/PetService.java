@@ -54,9 +54,9 @@ public class PetService {
 		return petRepository.getAnimalsByName(petName);
 	}
 
-	public List<PetAnimal> getAnimalsByCategoryAndGender(String petCategory, String petGender) {
+	public List<PetAnimal> getAnimalsByCategoryAndGender(String petCategory, String petGender, String petBreed) {
 		// TODO Auto-generated method stub
-		return petRepository.getAnimalsByCategoryAndGender(petCategory,petGender);
+		return petRepository.findByPetCategoryOrPetGenderOrPetBreedOrderByPetAgeAsc(petCategory,petGender,petBreed);
 	}
 	
 	public List<PetData> getAnimalsData(String petCategory, String petGender) {

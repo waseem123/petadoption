@@ -16,8 +16,14 @@ public class PetAdopter {
     private int adopterId;
     @Column(name = "adopter_name")
     private String adopterName;
-    @Column(name = "owner_address")
+    @Column(name = "adopter_address")
     private String adopterAddress;
+
+    @Column(name = "owner_email")
+    private String adopterEmail;
+
+    @Column(name = "owner_password")
+    private String adopterPassword;
 
     public PetAdopter() {
     }
@@ -46,5 +52,19 @@ public class PetAdopter {
         this.adopterAddress = adopterAddress;
     }
 
+    public String getAdopterEmail() {
+        return adopterEmail;
+    }
 
+    public void setAdopterEmail(String adopterEmail) {
+        this.adopterEmail = adopterEmail;
+    }
+
+    public String getAdopterPassword() {
+        return adopterPassword;
+    }
+
+    public void setAdopterPassword(String adopterPassword) {
+        this.adopterPassword = adopterPassword;
+    }
 }

@@ -25,6 +25,30 @@
         <table>
             <thead>
                 <tr>
+                    <th colspan="9">
+                        <form action="search">
+                            <select id="pet_category" name="pet_category" class="input" style="padding:0px">
+                                <option value="">SELECT CATEGORY</option>
+                                <c:forEach items="${pet_category}" var="pet_category">
+                                    <option value="${pet_category}">
+                                        ${pet_category}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <select id="pet_gender" name="pet_gender" class="input" style="padding:0px">
+                                <option value="">SELECT GENDER</option>
+                                <c:forEach items="${pet_gender}" var="pet_gender">
+                                    <option value="${pet_gender}">
+                                        ${pet_gender}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <input type="text" name="pet_breed" placeholder="Breed">
+                            <input type="submit" value="Search">
+                        </form>
+                    </th>
+                </tr>
+                <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Age (Months)</th>
@@ -48,15 +72,18 @@
                     <td>${pet.petOwner.ownerName}</td>
                     <td>${pet.petStatus==true?"AVAILABLE":"ADOPTED"}</td>
                     <td>
-                        <a href="/pets/${pet.petId}"><button>View</button></a>
-                        <a href="/pets/application/${pet.petId}"><button ${pet.petStatus==false?"disabled":""}>Apply to Adopt</button></a>
+                        <a href="/adopter/pets/${pet.petId}"><button>View</button></a>
+                        <form action="/adopter/pets/apply">
+                            <input type="hidden" value="${pet.petId}" name="pet_id">
+                            <button type="submit" ${pet.petStatus==false?"disabled":""}>Apply to Adopt</button>
+                        </form>
                     </td>
                 </tr>
                 </c:forEach>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">${message}</td>
+                    <td colspan="9">${message}</td>
                 </tr>
             </tfoot>
         </table>

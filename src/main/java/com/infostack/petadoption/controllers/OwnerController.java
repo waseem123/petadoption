@@ -172,11 +172,13 @@ public class OwnerController {
         return "pet-list";
     }
 
+/*
     @RequestMapping("/application/")
     public List<ApplicationDTO> getApplicationData() {
 
         return applicationService.getApplication();
     }
+*/
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap modelMap, HttpServletRequest request) {

@@ -16,10 +16,11 @@ public class ApplicationService {
 
 	public Application saveApplication(Application application) {
 		return applicationRepository.save(application);
-		
 	}
-	
-	public List<ApplicationDTO> getApplication() {
-		return applicationRepository.getAppDataWithOwner();
+
+
+
+	public List<Application> getApplicationByAdopter(int adopterId) {
+		return applicationRepository.findByPetAdopter_AdopterId(adopterId);
 	}
 }
