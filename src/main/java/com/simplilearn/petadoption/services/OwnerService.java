@@ -1,14 +1,14 @@
-package com.infostack.petadoption.services;
+package com.simplilearn.petadoption.services;
 
 import java.util.List;
 
+import com.simplilearn.petadoption.repositories.OwnerRepository;
+import com.simplilearn.petadoption.repositories.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.infostack.petadoption.Models.PetAnimal;
-import com.infostack.petadoption.Models.PetOwner;
-import com.infostack.petadoption.repositories.OwnerRepository;
-import com.infostack.petadoption.repositories.PetRepository;
+import com.simplilearn.petadoption.Models.PetAnimal;
+import com.simplilearn.petadoption.Models.PetOwner;
 
 @Service
 public class OwnerService {

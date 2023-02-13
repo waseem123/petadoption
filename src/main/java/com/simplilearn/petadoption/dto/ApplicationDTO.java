@@ -1,4 +1,4 @@
-package com.infostack.petadoption.dto;
+package com.simplilearn.petadoption.dto;
 
 import java.util.Date;
 

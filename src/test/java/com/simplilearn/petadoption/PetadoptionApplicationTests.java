@@ -1,4 +1,4 @@
-package com.infostack.petadoption;
+package com.simplilearn.petadoption;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

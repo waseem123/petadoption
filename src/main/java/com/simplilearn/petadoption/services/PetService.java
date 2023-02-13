@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.infostack.petadoption.services;
+package com.simplilearn.petadoption.services;
 
 import java.util.List;
 
 
-import com.infostack.petadoption.Models.PetAnimal;
-import com.infostack.petadoption.dto.PetData;
-import com.infostack.petadoption.repositories.PetRepository;
+import com.simplilearn.petadoption.Models.PetAnimal;
+import com.simplilearn.petadoption.dto.PetData;
+import com.simplilearn.petadoption.repositories.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PetService {
 	@Autowired
-	PetRepository petRepository;
+    PetRepository petRepository;
 	
 	public PetAnimal addNew(PetAnimal petAnimal) {
 		return petRepository.save(petAnimal);

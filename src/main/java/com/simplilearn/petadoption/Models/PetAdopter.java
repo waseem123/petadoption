@@ -1,4 +1,4 @@
-package com.infostack.petadoption.Models;
+package com.simplilearn.petadoption.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

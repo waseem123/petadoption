@@ -1,4 +1,4 @@
-package com.infostack.petadoption;
+package com.simplilearn.petadoption;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

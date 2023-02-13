@@ -1,28 +1,23 @@
-package com.infostack.petadoption.controllers;
+package com.simplilearn.petadoption.controllers;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simplilearn.petadoption.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.infostack.petadoption.Models.Application;
-import com.infostack.petadoption.Models.PetAdopter;
-import com.infostack.petadoption.Models.PetAnimal;
-import com.infostack.petadoption.Models.PetOwner;
-import com.infostack.petadoption.dto.ApplicationDTO;
-import com.infostack.petadoption.dto.PetData;
-import com.infostack.petadoption.services.ApplicationService;
-import com.infostack.petadoption.services.OwnerService;
-import com.infostack.petadoption.services.PetAdopterService;
-import com.infostack.petadoption.services.PetService;
+import com.simplilearn.petadoption.Models.Application;
+import com.simplilearn.petadoption.Models.PetAdopter;
+import com.simplilearn.petadoption.Models.PetAnimal;
+import com.simplilearn.petadoption.services.ApplicationService;
+import com.simplilearn.petadoption.services.PetAdopterService;
+import com.simplilearn.petadoption.services.PetService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

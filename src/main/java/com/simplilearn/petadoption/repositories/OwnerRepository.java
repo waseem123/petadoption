@@ -1,10 +1,10 @@
-package com.infostack.petadoption.repositories;
+package com.simplilearn.petadoption.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.infostack.petadoption.Models.PetOwner;
+import com.simplilearn.petadoption.Models.PetOwner;
 
 @Repository
 public interface OwnerRepository extends CrudRepository<PetOwner, Integer> {

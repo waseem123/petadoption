@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th colspan="9">
-                        <form action="search">
+                        <form action="/adopter/pets/search">
                             <select id="pet_category" name="pet_category" class="input" style="padding:0px">
                                 <option value="">SELECT CATEGORY</option>
                                 <c:forEach items="${pet_category}" var="pet_category">

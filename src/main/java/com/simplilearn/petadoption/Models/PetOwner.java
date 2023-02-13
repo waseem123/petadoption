@@ -1,4 +1,4 @@
-package com.infostack.petadoption.Models;
+package com.simplilearn.petadoption.Models;
 
 import java.util.List;
 

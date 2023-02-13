@@ -1,14 +1,12 @@
-package com.infostack.petadoption.controllers;
+package com.simplilearn.petadoption.controllers;
 
-import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infostack.petadoption.Models.Application;
-import com.infostack.petadoption.Models.PetAdopter;
+import com.simplilearn.petadoption.Models.Application;
+import com.simplilearn.petadoption.Models.PetAdopter;
+import com.simplilearn.petadoption.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.infostack.petadoption.Models.PetAnimal;
-import com.infostack.petadoption.Models.PetOwner;
-import com.infostack.petadoption.dto.ApplicationDTO;
-import com.infostack.petadoption.services.ApplicationService;
-import com.infostack.petadoption.services.OwnerService;
-import com.infostack.petadoption.services.PetAdopterService;
-import com.infostack.petadoption.services.PetService;
+import com.simplilearn.petadoption.Models.PetAnimal;
+import com.simplilearn.petadoption.Models.PetOwner;
+import com.simplilearn.petadoption.services.ApplicationService;
+import com.simplilearn.petadoption.services.PetAdopterService;
+import com.simplilearn.petadoption.services.PetService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

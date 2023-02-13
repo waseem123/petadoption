@@ -1,10 +1,9 @@
-package com.infostack.petadoption.services;
+package com.simplilearn.petadoption.services;
 
 import java.util.List;
 
-import com.infostack.petadoption.Models.Application;
-import com.infostack.petadoption.dto.ApplicationDTO;
-import com.infostack.petadoption.repositories.ApplicationRepository;
+import com.simplilearn.petadoption.Models.Application;
+import com.simplilearn.petadoption.repositories.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
