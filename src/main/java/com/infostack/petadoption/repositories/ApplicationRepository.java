@@ -16,6 +16,9 @@ public interface ApplicationRepository extends CrudRepository<Application,Intege
 
 	@Query("select a from Application a where a.petAdopter.adopterId = ?1")
 	List<Application> findByPetAdopter_AdopterId(int adopterId);
+
+    @Query("select a from Application a where a.petAnimal.petOwner.ownerId = ?1")
+    List<Application> findByPetOwner(int ownerId);
 	
 
 }

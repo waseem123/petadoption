@@ -23,4 +23,8 @@ public class ApplicationService {
 	public List<Application> getApplicationByAdopter(int adopterId) {
 		return applicationRepository.findByPetAdopter_AdopterId(adopterId);
 	}
+
+    public List<Application> getApplicationByOwner(int ownerId) {
+		return applicationRepository.findByPetOwner(ownerId);
+    }
 }

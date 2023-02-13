@@ -4,6 +4,8 @@ import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.infostack.petadoption.Models.Application;
+import com.infostack.petadoption.Models.PetAdopter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -172,13 +174,31 @@ public class OwnerController {
         return "pet-list";
     }
 
-/*
-    @RequestMapping("/application/")
-    public List<ApplicationDTO> getApplicationData() {
-
-        return applicationService.getApplication();
+    @RequestMapping("/application")
+    public String getApplicationData(ModelMap modelMap, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("ownerId") == null) {
+            return "redirect:/owner/";
+        }
+        int ownerId = (int) session.getAttribute("ownerId");
+        List<Application> applications = new ArrayList<>();
+        applications = applicationService.getApplicationByOwner(ownerId);
+        modelMap.addAttribute("applications", applications);
+        modelMap.addAttribute("message", "Total " + applications.size() + " records found.");
+        return "applications-owner";
     }
-*/
+
+    @RequestMapping("/adopter/{adopterId}")
+    public String getAdopterById(ModelMap modelMap, @PathVariable int adopterId) {
+        PetAdopter petAdopter = null;
+        try {
+            petAdopter = petAdopterService.getAdopterById(adopterId);
+        } catch (Exception ex) {
+            petAdopter = new PetAdopter();
+        }
+        modelMap.addAttribute("adopter", petAdopter);
+        return "pet-adopter";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap modelMap, HttpServletRequest request) {
